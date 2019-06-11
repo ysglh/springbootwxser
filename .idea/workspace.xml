@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c32e2a0b-c31b-4a5d-a192-3f9b1d6ddb46" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/dcxy/demo/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/dcxy/demo/controller/VideoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/dcxy/demo/utils/MergeVideoMp3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/dcxy/demo/utils/MergeVideoMp3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-    </list>
+    <list default="true" id="c32e2a0b-c31b-4a5d-a192-3f9b1d6ddb46" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/demo/target/" />
@@ -35,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/dcxy/demo/utils/MergeVideoMp3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="66" column="9" lean-forward="true" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
+            <state relative-caret-position="194">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="65" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -481,7 +477,7 @@
       <workItem from="1560144923879" duration="15702000" />
       <workItem from="1560238946535" duration="5640000" />
       <workItem from="1560247900694" duration="1212000" />
-      <workItem from="1560253435245" duration="5518000" />
+      <workItem from="1560253435245" duration="5794000" />
     </task>
     <task id="LOCAL-00001" summary="springbootweixinapp">
       <created>1560253683679</created>
@@ -497,16 +493,23 @@
       <option name="project" value="LOCAL" />
       <updated>1560255257025</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="springbootweixinapp">
+      <created>1560260180023</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1560260180023</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48260000" />
+    <option name="totallyTimeSpent" value="48536000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="464" y="46" width="1440" height="938" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.303207" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22269808" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -529,7 +532,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="15" sideWeight="0.49892932" visible="true" weight="0.49617347" />
+      <window_info anchor="bottom" id="Run Dashboard" order="15" sideWeight="0.49892932" visible="true" weight="0.43126386" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.5618321" />
@@ -1041,8 +1044,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/dcxy/demo/utils/MergeVideoMp3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="66" column="9" lean-forward="true" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
+        <state relative-caret-position="194">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="65" selection-end-column="32" />
         </state>
       </provider>
     </entry>

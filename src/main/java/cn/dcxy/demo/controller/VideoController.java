@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.UUID;
-
+import cn.dcxy.demo.org.n3r.idworker.Sid;
 import cn.dcxy.demo.controller.BasicController;
 import cn.dcxy.demo.entry.Bgm;
 import cn.dcxy.demo.entry.Videos;
@@ -34,6 +34,8 @@ public class VideoController extends BasicController {
 	private BgmRepository bgmRepository;
 	@Autowired
 	private VideosRepository videosRepository;
+	@Autowired
+	private Sid sid;
 	@ApiOperation(value="上传视频", notes="上传视频的接口")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name="userId", value="用户id", required=true,
@@ -139,6 +141,8 @@ public class VideoController extends BasicController {
 
 		// 保存视频信息到数据库
 		Videos video = new Videos();
+		String id = sid.nextShort();
+		video.setId(id);
 		video.setAudioId(bgmId);
 		video.setUserId(userId);
 		video.setVideoSeconds((float)videoSeconds);

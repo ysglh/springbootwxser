@@ -27,6 +27,9 @@ spring:
         max-idle: 10
         min-idle: 2
     timeout: 0
+  servlet:
+    multipart:
+      max-file-size: 10240MB
 
 
 

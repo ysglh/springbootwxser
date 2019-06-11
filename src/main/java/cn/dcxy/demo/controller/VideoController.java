@@ -121,12 +121,10 @@ public class VideoController extends BasicController {
 		// 那就查询bgm的信息，并且合并视频，生产新的视频
 		if (StringUtils.isNotBlank(bgmId)) {
 			Bgm bgm=bgmRepository.getOne(bgmId);
-
 			String mp3InputPath = FILE_SPACE + bgm.getPath();
-
+			System.out.println("mp3InputPath==="+mp3InputPath);
 			MergeVideoMp3 tool = new MergeVideoMp3(FFMPEG_EXE);
 			String videoInputPath = finalVideoPath;
-
 			String videoOutputName = UUID.randomUUID().toString() + ".mp4";
 			uploadPathDB = "/" + userId + "/video" + "/" + videoOutputName;
 			finalVideoPath = FILE_SPACE + uploadPathDB;

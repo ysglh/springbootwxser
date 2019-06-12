@@ -11,7 +11,20 @@ import java.util.List;
 
 @Repository
 public interface CommentsVORepository extends PagingAndSortingRepository<CommentsVO,String> {
-    @Query(value = "SELECT cvo.id,cvo.comment,cvo.create_time,cvo.face_image,cvo.from_user_id,cvo.nickname,cvo.time_ago_str,cvo.to_nickname,cvo.video_id FROM commentsvo cvo WHERE cvo.video_id=?1",nativeQuery = true)
+    @Query(value = "SELECT " +
+            "c.id," +
+            "c.comment," +
+            "c.create_time," +
+            "u.face_image AS face_image," +
+            "c.from_user_id," +
+            "c.to_user_id AS time_ago_str," +
+            "c.video_id," +
+            "u.nickname," +
+            "tu.nickname AS to_nickname " +
+            "from comments c " +
+            "LEFT JOIN users u ON c.from_user_id = u.id " +
+            "left JOIN users tu ON c.to_user_id = tu.id " +
+            "where c.video_id =?1 ORDER BY c.create_time DESC",nativeQuery = true)
     List<CommentsVO> queryComments(String videoId);
 
 

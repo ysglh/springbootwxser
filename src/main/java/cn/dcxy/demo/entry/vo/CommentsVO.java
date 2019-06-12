@@ -8,24 +8,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CommentsVO {
     @Id
     private String id;
-
     /**
      * 视频id
      */
     private String videoId;
-
     /**
      * 留言者，评论的用户id
      */
     private String fromUserId;
-
     private Date createTime;
 
     /**
      * 评论内容
      */
     private String comment;
-    
     private String faceImage;
     private String nickname;
     private String toNickname;

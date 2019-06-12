@@ -392,7 +392,6 @@ public class VideoController extends BasicController {
     @PostMapping("/saveComment")
     public DcJSONResult saveComment(@RequestBody Comments comment,
                                     String fatherCommentId, String toUserId) throws Exception {
-
         comment.setFatherCommentId(fatherCommentId);
         comment.setToUserId(toUserId);
         String id = sid.nextShort();

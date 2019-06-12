@@ -234,6 +234,8 @@ public class VideoController extends BasicController {
      * isSaveRecord：1 - 需要保存
      * 0 - 不需要保存 ，或者为空的时候
      */
+
+    @ApiOperation(value = "查询视频")
     @PostMapping(value = "/showAll")
     public DcJSONResult showAll(@RequestBody Videos video, Integer isSaveRecord,
                                 Integer page, Integer pageSize) throws Exception {
@@ -254,8 +256,15 @@ public class VideoController extends BasicController {
             searchRecordsRepository.save(record);
         }
         PageHelper.startPage(page, pageSize);
-        List<VideosVO> list = videosRestRepository.queryAllVideos(desc, userId);
-        PageInfo<VideosVO> pageList = new PageInfo<>(list);
+        List<Videos> list = null;
+        if(userId == null){
+            list = videosRepository.findAll();
+        }else {
+            list = videosRestRepository.queryMyFollowVideos(userId);
+
+        }
+        System.out.println(userId);
+        PageInfo<VideosVO> pageList = new PageInfo(list);
         PagedResult pagedResult = new PagedResult();
         pagedResult.setPage(page);
         pagedResult.setTotal(pageList.getPages());
@@ -267,6 +276,7 @@ public class VideoController extends BasicController {
     /**
      * @Description: 我关注的人发的视频
      */
+    @ApiOperation(value = "关注的人发的视频")
     @PostMapping("/showMyFollow")
     public DcJSONResult showMyFollow(String userId, Integer page) throws Exception {
 
@@ -280,8 +290,8 @@ public class VideoController extends BasicController {
 
         int pageSize = 6;
         PageHelper.startPage(page, pageSize);
-        List<VideosVO> list = videosRestRepository.queryMyFollowVideos(userId);
-        PageInfo<VideosVO> pageList = new PageInfo<>(list);
+        List<Videos> list = videosRestRepository.queryMyFollowVideos(userId);
+        PageInfo<VideosVO> pageList = new PageInfo(list);
 
         PagedResult pagedResult = new PagedResult();
         pagedResult.setTotal(pageList.getPages());
@@ -295,6 +305,7 @@ public class VideoController extends BasicController {
     /**
      * @Description: 我收藏(点赞)过的视频列表
      */
+    @ApiOperation(value = "我收藏的视频")
     @PostMapping("/showMyLike")
     public DcJSONResult showMyLike(String userId, Integer page, Integer pageSize) throws Exception {
 
@@ -310,8 +321,8 @@ public class VideoController extends BasicController {
             pageSize = 6;
         }
         PageHelper.startPage(page, pageSize);
-        List<VideosVO> list = videosRestRepository.queryMyFollowVideos(userId);
-        PageInfo<VideosVO> pageList = new PageInfo<>(list);
+        List<Videos> list = videosRestRepository.queryMyFollowVideos(userId);
+        PageInfo<VideosVO> pageList = new PageInfo(list);
         PagedResult pagedResult = new PagedResult();
         pagedResult.setTotal(pageList.getPages());
         pagedResult.setRows(list);
@@ -320,11 +331,13 @@ public class VideoController extends BasicController {
         return DcJSONResult.ok(pagedResult);
     }
 
+    @ApiOperation(value = "热词")
     @PostMapping(value = "/hot")
     public DcJSONResult hot() throws Exception {
         return DcJSONResult.ok(videosRestRepository.getHotwords());
     }
 
+    @ApiOperation(value = "添加用户和视频的喜欢点赞关联")
     @PostMapping(value = "/userLike")
     public DcJSONResult userLike(String userId, String videoId, String videoCreaterId)
             throws Exception {
@@ -351,6 +364,7 @@ public class VideoController extends BasicController {
         return DcJSONResult.ok();
     }
 
+    @ApiOperation(value = "删除用户和视频的喜欢点赞关联")
     @PostMapping(value = "/userUnLike")
     public DcJSONResult userUnLike(String userId, String videoId, String videoCreaterId) throws Exception {
         // 1. 删除用户和视频的喜欢点赞关联关系表
@@ -374,6 +388,7 @@ public class VideoController extends BasicController {
         return DcJSONResult.ok();
     }
 
+    @ApiOperation(value = "保存评论")
     @PostMapping("/saveComment")
     public DcJSONResult saveComment(@RequestBody Comments comment,
                                     String fatherCommentId, String toUserId) throws Exception {
@@ -388,6 +403,7 @@ public class VideoController extends BasicController {
         return DcJSONResult.ok();
     }
 
+    @ApiOperation(value = "得到某一视频评论")
     @PostMapping("/getVideoComments")
     public DcJSONResult getVideoComments(String videoId, Integer page, Integer pageSize) throws Exception {
         if (StringUtils.isBlank(videoId)) {

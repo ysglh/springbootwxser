@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import cn.dcxy.demo.entry.Users;
 import cn.dcxy.demo.entry.vo.UsersVO;
+import cn.dcxy.demo.org.n3r.idworker.Sid;
 import cn.dcxy.demo.repository.UsersRepository;
 import cn.dcxy.demo.repository.rest.UsersRestRepository;
 import cn.dcxy.demo.utils.DcJSONResult;
@@ -26,10 +27,12 @@ public class RegistLoginController extends BasicController {
 
 	private final UsersRepository usersRepository;
 	private final UsersRestRepository usersRestRepository;
+	private final Sid sid;
 	@Autowired
-	public RegistLoginController(UsersRepository usersRepository, UsersRestRepository usersRestRepository) {
+	public RegistLoginController(UsersRepository usersRepository, UsersRestRepository usersRestRepository, Sid sid) {
 		this.usersRepository = usersRepository;
 		this.usersRestRepository = usersRestRepository;
+		this.sid = sid;
 	}
 
 
@@ -45,6 +48,8 @@ public class RegistLoginController extends BasicController {
 		Users username = usersRestRepository.findUsersByName(user.getUsername());
 		// 3. 保存用户，注册信息
 		if (username == null ) {
+			String id = sid.nextShort();
+			user.setId(id);
 			user.setNickname(user.getUsername());
 			user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
 			user.setFansCounts(0);

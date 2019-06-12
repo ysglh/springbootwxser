@@ -10,6 +10,7 @@ import cn.dcxy.demo.entry.UsersLikeVideos;
 import cn.dcxy.demo.entry.UsersReport;
 import cn.dcxy.demo.entry.vo.PublisherVideo;
 import cn.dcxy.demo.entry.vo.UsersVO;
+import cn.dcxy.demo.org.n3r.idworker.Sid;
 import cn.dcxy.demo.repository.UsersReportRepository;
 import cn.dcxy.demo.repository.UsersRepository;
 import cn.dcxy.demo.repository.rest.UsersFansRestRepository;
@@ -35,7 +36,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(value="用户相关业务的接口", tags= {"用户相关业务的controller"})
 @RequestMapping("/user")
 public class UserController extends BasicController {
-	
+	private Sid sid;
 	private final UsersRepository usersRepository;
 	private final UsersFansRestRepository usersFansRestRepository;
 	private final UsersLikeVideosRestRepository usersLikeVideosRestRepository;
@@ -43,7 +44,8 @@ public class UserController extends BasicController {
 
 
 	@Autowired
-	public UserController(UsersRepository usersRepository, UsersFansRestRepository usersFansRestRepository, UsersLikeVideosRestRepository usersLikeVideosRestRepository, UsersReportRepository usersReportRepository) {
+	public UserController(Sid sid, UsersRepository usersRepository, UsersFansRestRepository usersFansRestRepository, UsersLikeVideosRestRepository usersLikeVideosRestRepository, UsersReportRepository usersReportRepository) {
+		this.sid = sid;
 		this.usersRepository = usersRepository;
 		this.usersFansRestRepository = usersFansRestRepository;
 		this.usersLikeVideosRestRepository = usersLikeVideosRestRepository;
@@ -151,6 +153,8 @@ public class UserController extends BasicController {
 		}
 		// 1. 查询视频发布者的信息
 		Users userInfo = usersRepository.getOne(publishUserId);
+		System.out.println("publishUserId---"+publishUserId);
+		System.out.println(userInfo);
 		UsersVO publisher = new UsersVO();
 		BeanUtils.copyProperties(userInfo, publisher);
 		// 2. 查询当前登录者和视频的点赞关系
@@ -168,11 +172,14 @@ public class UserController extends BasicController {
 
 	@PostMapping("/beyourfans")
 	public DcJSONResult beyourfans(String userId, String fanId) throws Exception {
-		
+		System.out.println("userId---"+userId);
+		System.out.println("fanId---"+fanId);
 		if (StringUtils.isBlank(userId) || StringUtils.isBlank(fanId)) {
 			return DcJSONResult.errorMsg("");
 		}
+		String id = sid.nextShort();
 		UsersFans usersFans = new UsersFans();
+		usersFans.setId(id);
 		usersFans.setUserId(userId);
 		usersFans.setFanId(fanId);
 		usersFansRestRepository.save(usersFans);

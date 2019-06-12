@@ -4,8 +4,9 @@ import java.util.Date;
 import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+@Entity
 public class CommentsVO {
+    @Id
     private String id;
 
     /**

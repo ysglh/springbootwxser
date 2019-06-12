@@ -1,5 +1,8 @@
 package cn.dcxy.demo.entry.vo;
 
+import javax.persistence.Entity;
+
+
 public class PublisherVideo {
     
 	public UsersVO publisher;

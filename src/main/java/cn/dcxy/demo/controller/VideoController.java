@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.UUID;
-
+import cn.dcxy.demo.org.n3r.idworker.Sid;
 import cn.dcxy.demo.controller.BasicController;
 import cn.dcxy.demo.entry.Bgm;
 import cn.dcxy.demo.entry.Videos;
@@ -34,6 +34,8 @@ public class VideoController extends BasicController {
 	private BgmRepository bgmRepository;
 	@Autowired
 	private VideosRepository videosRepository;
+	@Autowired
+	private Sid sid;
 	@ApiOperation(value="上传视频", notes="上传视频的接口")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name="userId", value="用户id", required=true,
@@ -119,12 +121,10 @@ public class VideoController extends BasicController {
 		// 那就查询bgm的信息，并且合并视频，生产新的视频
 		if (StringUtils.isNotBlank(bgmId)) {
 			Bgm bgm=bgmRepository.getOne(bgmId);
-
 			String mp3InputPath = FILE_SPACE + bgm.getPath();
-
+			System.out.println("mp3InputPath==="+mp3InputPath);
 			MergeVideoMp3 tool = new MergeVideoMp3(FFMPEG_EXE);
 			String videoInputPath = finalVideoPath;
-
 			String videoOutputName = UUID.randomUUID().toString() + ".mp4";
 			uploadPathDB = "/" + userId + "/video" + "/" + videoOutputName;
 			finalVideoPath = FILE_SPACE + uploadPathDB;
@@ -139,6 +139,8 @@ public class VideoController extends BasicController {
 
 		// 保存视频信息到数据库
 		Videos video = new Videos();
+		String id = sid.nextShort();
+		video.setId(id);
 		video.setAudioId(bgmId);
 		video.setUserId(userId);
 		video.setVideoSeconds((float)videoSeconds);
